@@ -1,36 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>For Gitanjali💖</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+</head>
+
+<body>
 
     <section class="hero">
         <img src="photo2.jpeg" alt="your picture">
-<select onchange="changeSong(this.value)">
-  <option value="song.mp3">Song 1 💖</option>
-  <option value="song2.mp3">Song 2 🌸</option>
-  <option value="song3.mp3">Song 3 🎶</option>
-</select>
 
-<br><br>
+        <select onchange="changeSong(this.value)">
+            <option value="song.mp3">Song 1 💖</option>
+            <option value="song2.mp3">Song 2 🌸</option>
+            <option value="song3.mp3">Song 3 🎶</option>
+        </select>
 
-<audio id="musicPlayer" controls>
-  <source src="song.mp3" type="audio/mp3">
-</audio>
+        <br><br>
 
-<script>
-function changeSong(song) {
-  const player = document.getElementById("musicPlayer");
-  player.src = song;
-  player.play();
-}
-</script>
-
-
+        <audio id="musicPlayer" controls>
+            <source src="song.mp3" type="audio/mpeg">
+        </audio>
 
         <h1>Hi Ginni 🥰</h1>
         <p>Wait… something is loading 💌</p>
@@ -58,9 +50,23 @@ function changeSong(song) {
 
     <div class="hearts-container"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Confetti Library -->
+    <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <script src="script.js"></script>
+    <!-- Main Script -->
+    <script defer src="script.js"></script>
+
+    <!-- Audio Change Script -->
+    <script>
+        function changeSong(song) {
+            const player = document.getElementById("musicPlayer");
+            const source = player.querySelector("source");
+
+            source.src = song;
+            player.load();
+            player.play();
+        }
+    </script>
 
 </body>
 </html>
