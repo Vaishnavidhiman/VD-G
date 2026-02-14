@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Gitanjali💖</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <section class="hero">
+        <img src="photo2.jpeg" alt="your picture">
+        <h1>Hi Ginni 🥰</h1>
+        <p>Wait… something is loading 💌</p>
+        <h2 id="countdown"></h2>
+    </section>
+
+    <section class="proposal hidden" id="proposalSection">
+        <div class="card">
+
+            <img src="photo.jpeg" alt="Our picture">
+
+            <p id="typewriter"></p>
+
+            <h2>Will you be my Valentine? 💖</h2>
+
+            <div class="buttons">
+                <button class="yes" onclick="sayYes()">Yes 💖</button>
+                <button class="no" onmouseover="moveButton()">No 💔</button>
+            </div>
+
+            <p id="finalMessage"></p>
+
+            <audio id="bgMusic" src="song.mp3"></audio>
+
+        </div>
+    </section>
+
+    <div class="hearts-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

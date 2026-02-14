@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    background: linear-gradient(-45deg, #ff758c, #ff7eb3, #fad0c4, #ff9a9e);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+    transition: filter 0.5s ease;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 20px white;
+}
+
+.proposal {
+    display: flex;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 600px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+img {
+    width: 220px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.yes {
+    background: white;
+    color: #ff4b6e;
+}
+
+.yes:hover {
+    transform: scale(1.1);
+}
+
+.no {
+    background: rgba(255,255,255,0.3);
+    color: white;
+    position: relative;
+}
+
+#typewriter {
+    min-height: 80px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.heart {
+    position: fixed;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
