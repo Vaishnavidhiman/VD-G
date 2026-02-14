@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>For Gitanjali💖</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -12,7 +13,9 @@
     <section class="hero">
         <img src="photo2.jpeg" alt="your picture">
 
-        <select onchange="changeSong(this.value)">
+        <label for="musicSelect" id="button">Choose a song</label>
+        <br>
+        <select id="musicSelect" onchange="changeSong(this.value)">
             <option value="song.mp3">Song 1 💖</option>
             <option value="song2.mp3">Song 2 🌸</option>
             <option value="song3.mp3">Song 3 🎶</option>
@@ -24,7 +27,7 @@
             <source src="song.mp3" type="audio/mpeg">
         </audio>
 
-        <h1>Hi Ginni 🥰</h1>
+        <h1>Hi Ginni 😍 </h1>
         <p>Wait… something is loading 💌</p>
         <h2 id="countdown"></h2>
     </section>

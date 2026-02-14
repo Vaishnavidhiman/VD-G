@@ -87,19 +87,124 @@ button {
     line-height: 1.6;
 }
 
-.heart {
+/* Hearts container: keeps hearts organized and prevents accidental pointer capture */
+.hearts-container {
     position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9998;
+}
+
+/* Heart elements appended to the container will float up */
+.hearts-container .heart,
+.heart {
+    position: absolute;
+    bottom: -40px;
+    /* base size, JS may override with inline fontSize */
     font-size: 20px;
-    animation: floatUp linear infinite;
+    will-change: transform, opacity;
+    /* Allow JS to control duration via inline style or CSS variable */
+    animation-name: floatUp;
+    animation-duration: var(--duration, 6s);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    /* subtle drop shadow for depth */
+    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.12));
+    opacity: 0.95;
 }
 
 @keyframes floatUp {
-    from {
-        transform: translateY(100vh);
+    0% {
+        transform: translateY(0) translateX(0) rotate(var(--rotation, 0deg));
         opacity: 1;
     }
-    to {
-        transform: translateY(-10vh);
+    25% {
+        transform: translateY(-25vh) translateX(var(--drift, 12px)) rotate(calc(var(--rotation, 0deg) + 8deg));
+    }
+    50% {
+        transform: translateY(-60vh) translateX(calc(var(--drift, 12px) * -1)) rotate(calc(var(--rotation, 0deg) - 8deg));
+    }
+    75% {
+        transform: translateY(-95vh) translateX(var(--drift, 12px)) rotate(calc(var(--rotation, 0deg) + 4deg));
+    }
+    100% {
+        transform: translateY(-120vh) translateX(0) rotate(var(--rotation, 0deg));
+        opacity: 0;
+    }
+}
+
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .hearts-container .heart,
+    .heart {
+        animation: none !important;
+        opacity: 0.9;
+        transform: translateY(-20vh) !important;
+    }
+}
+
+/* Typewriter caret */
+#typewriter {
+    white-space: pre-wrap;
+    text-align: left;
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+#typewriter::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: white;
+    margin-left: 6px;
+    vertical-align: bottom;
+    animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Button tweaks */
+button { transition: transform 0.25s ease, opacity 0.25s ease; }
+.no { transition: transform 0.15s ease; }
+
+/* Accessibility: visible focus outlines for keyboard users */
+.yes:focus,
+.no:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .hero h1 { font-size: 2rem; }
+    img { width: 160px; }
+    .card { padding: 24px; border-radius: 18px; }
+    #typewriter { font-size: 1rem; min-height: 100px; }
+}
+
+/* Falling / shower animation (hearts rain down) */
+@keyframes fallDown {
+    0% {
+        transform: translateY(0) translateX(0) rotate(var(--rotation, 0deg));
+        opacity: 0.95;
+    }
+    25% {
+        transform: translateY(20vh) translateX(var(--drift, 12px)) rotate(calc(var(--rotation, 0deg) + 8deg));
+    }
+    50% {
+        transform: translateY(45vh) translateX(calc(var(--drift, 12px) * -1)) rotate(calc(var(--rotation, 0deg) - 8deg));
+    }
+    75% {
+        transform: translateY(75vh) translateX(var(--drift, 12px)) rotate(calc(var(--rotation, 0deg) + 4deg));
+    }
+    100% {
+        transform: translateY(120vh) translateX(0) rotate(var(--rotation, 0deg));
         opacity: 0;
     }
 }

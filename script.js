@@ -1,69 +1,80 @@
-let count = 10;
-const countdownEl = document.getElementById("countdown");
+// ❤️ Romantic Message
+const text = `You are one of my favourite people, my comfort human, and the reason
+I smile randomly. You are a great inspiration. You teach me a lot of
+things. I have learned so much from you and I truly use those lessons
+in my life.
 
-const countdownInterval = setInterval(() => {
-    countdownEl.innerText = count;
-    count--;
+Sometimes I adapt quickly, sometimes I take time. Because as humans,
+it is not always easy to accept our flaws. But in the end, I deeply
+appreciate you for helping me grow.
 
-    if (count < 0) {
-        clearInterval(countdownInterval);
-        document.querySelector(".hero").style.display = "none";
-        document.getElementById("proposalSection").classList.remove("hidden");
-        startTypewriter();
-    }
-}, 1000);
-const text = 
-        `You are my one of the favourite person, my comfort human, and the reason
-        I smile randomly. You are a great inspiration. You teach me alot of
-        things. You inspire me. I have learned a lot of things from you. And i
-        do use those lessons in my life. Well sometimes i adapt them quickly,
-        sometimes i take time and i agree sometimes i just feel like it's ok the
-        way i am. Because as a human it is sometimes dificult for us to accept
-        our flaws and deny them. But in the end i really reallyappreciate you
-        for telling me. I love you for that. And i have grown so much with
-        you.You are a great human. Good friend. Kbhi kbhi ldai bi zaruri hai.
-        But deep down i love you. And i don't want to loose you.💕`;
-let index = 0;
-function startTypewriter() {
+You are a beautiful human. A great friend.
+And deep down, I love you.
+I never want to lose you. 💕`;
+
+// ❤️ Typewriter Effect
+function startTypewriter(speed = 35) {
     const typewriter = document.getElementById("typewriter");
+    if (!typewriter) return;
+
+    let index = 0;
+    typewriter.textContent = "";
 
     function type() {
         if (index < text.length) {
-            typewriter.innerHTML += text.charAt(index);
+            typewriter.textContent += text.charAt(index);
             index++;
-            setTimeout(type, 40);
+            setTimeout(type, speed);
         }
     }
 
     type();
 }
 
-
+// 💔 Move "No" Button
 function moveButton() {
     const button = document.querySelector(".no");
-    const x = Math.random() * 400 - 200;
-    const y = Math.random() * 200 - 100;
+    if (!button) return;
+
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 100 - 50;
+
     button.style.transform = `translate(${x}px, ${y}px)`;
 }
 
+// 💖 When She Clicks YES
 function sayYes() {
-    document.getElementById("finalMessage").innerText =
-        "YAYYYYY 😭💖 You just made my heart explode!!!";
+    const finalMessageEl = document.getElementById("finalMessage");
+    if (finalMessageEl) {
+        finalMessageEl.innerText =
+            "YAYYYYY 😭💖 You just made my heart explode!!!";
+    }
 
-    document.getElementById("bgMusic").play();
+    // Play music safely
+    const player = document.getElementById("musicPlayer");
+    if (player) {
+        player.play().catch(() => {});
+    }
 
-    const container = document.body;
-    const fireworks = new Fireworks.default(container);
-    fireworks.start();
+    // Confetti effect
+    if (typeof confetti === "function") {
+        confetti({
+            particleCount: 250,
+            spread: 150,
+            origin: { y: 0.6 }
+        });
+    }
 }
 
+// 💕 Floating Hearts
 function createHeart() {
     const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
+    heart.className = "heart";
+    heart.textContent = "💖";
 
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+    heart.style.fontSize = 15 + Math.random() * 25 + "px";
+    heart.style.animationDuration = 3 + Math.random() * 3 + "s";
 
     document.body.appendChild(heart);
 
@@ -72,4 +83,38 @@ function createHeart() {
     }, 6000);
 }
 
-setInterval(createHeart, 500);
+// ⏳ Start Everything After DOM Loads
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Countdown
+    let count = 10;
+    const countdownEl = document.getElementById("countdown");
+
+    if (countdownEl) {
+        const countdownInterval = setInterval(() => {
+            countdownEl.textContent = count;
+            count--;
+
+            if (count < 0) {
+                clearInterval(countdownInterval);
+
+                const hero = document.querySelector(".hero");
+                if (hero) hero.style.display = "none";
+
+                const proposal = document.getElementById("proposalSection");
+                if (proposal) proposal.classList.remove("hidden");
+
+                startTypewriter();
+            }
+        }, 1000);
+    }
+
+    // Start floating hearts
+    setInterval(createHeart, 500);
+
+    // Attach move effect to No button
+    const noBtn = document.querySelector(".no");
+    if (noBtn) {
+        noBtn.addEventListener("mouseenter", moveButton);
+    }
+});
